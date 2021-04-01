@@ -21,16 +21,22 @@ public abstract class Command extends ListenerAdapter {
     private final Permission permission;
     private final String usage;
 
+    protected boolean isMemberOnly;
+
     public Command(String name, Permission permission, String usage) {
         this.name = name;
         this.permission = permission;
         this.usage = usage;
+
+        this.isMemberOnly = true;
     }
 
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         String[] args = event.getMessage().getContentRaw().split("\\s+");
+
+        if (isMemberOnly) { if (event.getMember().getUser().isBot() || event.getMember().getUser().isFake()) return; }
 
         if (!args[0].equalsIgnoreCase(getPrefix() + name)) {
             return;

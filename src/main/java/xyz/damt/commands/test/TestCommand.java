@@ -10,6 +10,8 @@ public class TestCommand extends Command {
 
     public TestCommand() {
         super("test", Permission.ADMINISTRATOR, "-test test");
+
+        this.isMemberOnly = true;
     }
 
     @Override
