@@ -4,7 +4,7 @@ Do you code discord bot with JDA? This is the perfect command API for you!
 ### Registering
 
 ```java
-public class Bot {
+public class Bot { //The class "Bot" must be your main class!
 
     private final JDA jda;
 
@@ -14,7 +14,7 @@ public class Bot {
 
         Arrays.asList(
                 new TestCommand()
-        ).forEach(command -> command.register(jda, true));
+        ).forEach(command -> command.register(jda, true)); //You can do it like this or you can identify each command and register it seperately
     }
 
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class Bot {
     }
 ```
 
-###Example Method
+### Example Method
 
 ```java
 public class TestCommand extends Command {
@@ -30,7 +30,7 @@ public class TestCommand extends Command {
     public TestCommand() {
         super("test", Permission.ADMINISTRATOR, "-test test");
 
-        this.isMemberOnly = true;
+        this.isMemberOnly = true; //sets if the command is member only
     }
 
     @Override
