@@ -36,7 +36,7 @@ public abstract class Command extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         String[] args = event.getMessage().getContentRaw().split("\\s+");
 
-        if (isMemberOnly) { if (event.getMember().getUser().isBot() || event.getMember().getUser().isFake()) return; }
+        if (isMemberOnly) { if (Objects.requireNonNull(event.getMember()).getUser().isBot() || event.getMember().getUser().isFake()) return; }
 
         if (!args[0].equalsIgnoreCase(getPrefix() + name)) {
             return;
