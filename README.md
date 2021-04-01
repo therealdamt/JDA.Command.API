@@ -1,5 +1,8 @@
-# JDA.Command.API
+# JDA Command API
 Do you code discord bot with JDA? This is the perfect command API for you!
+
+### Where to find
+You can find the Command API at ``src/main/java/xyz/damt/commands/Command.java``
 
 ### Credits
 This API was created by damt.
