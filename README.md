@@ -5,7 +5,6 @@ Do you code discord bot with JDA? This is the perfect command API for you!
 This API was created by damt.
 
 Telegram -> https://t.me/therealdamt
-Discord -> damt#3333
 
 ### Rights
 Any user has full rights to resell bots using this API, and using it.
