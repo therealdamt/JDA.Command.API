@@ -1,4 +1,4 @@
-package xyz.damt.commands.api;
+package xyz.damt.commands;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;

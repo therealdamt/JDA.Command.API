@@ -1,15 +1,15 @@
-package xyz.damt.commands;
+package xyz.damt.commands.test;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
-import xyz.damt.commands.api.Command;
+import xyz.damt.commands.Command;
 
 public class TestCommand extends Command {
 
     public TestCommand() {
-        super("test", Permission.ADMINISTRATOR, "-test lol");
+        super("test", Permission.ADMINISTRATOR, "-test test");
     }
 
     @Override
@@ -21,7 +21,7 @@ public class TestCommand extends Command {
             return;
         }
 
-        if (args[0].isEmpty() || !args[0].equalsIgnoreCase("lol")) {
+        if (args[0].isEmpty() || !args[0].equalsIgnoreCase("test")) {
             channel.sendMessage("Invalid Value").queue();
             return;
         }
