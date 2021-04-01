@@ -23,7 +23,9 @@ public class Bot { //The class "Bot" must be your main class!
 
         Arrays.asList(
                 new TestCommand()
-        ).forEach(command -> command.register(jda, true)); //You can do it like this or you can identify each command and register it seperately
+        ).forEach(command -> command.register(jda, true)); //You can do it like this or you can 
+                                                           //identify each command and register 
+                                                           //it seperately
     }
 
     public static void main(String[] args) {
