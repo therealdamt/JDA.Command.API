@@ -45,6 +45,7 @@ public class TestCommand extends Command {
         super("test", Permission.ADMINISTRATOR, "-test test");
 
         this.isMemberOnly = true; //sets if the command is member only
+        this.prefix = "-"; //the default prefix is "-" you can change in here or in Command.java
     }
 
     @Override
@@ -62,15 +63,5 @@ public class TestCommand extends Command {
         }
 
         channel.sendMessage("Passed").queue();
-    }
-
-    @Override
-    public String getPrefix() {
-        return "-";
-    }
-
-    @Override
-    public String getNoPermissionMessage() {
-        return "You don't have the permission %permission% to do this command!";
     }
 ```
