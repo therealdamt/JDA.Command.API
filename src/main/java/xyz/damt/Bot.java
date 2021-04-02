@@ -17,7 +17,7 @@ public class Bot {
 
         Arrays.asList(
                 new TestCommand()
-        ).forEach(command -> command.register(jda, true));
+        ).forEach(testCommand -> testCommand.register(jda, true));
     }
 
     public static void main(String[] args) {

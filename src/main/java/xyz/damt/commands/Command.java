@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -15,7 +16,7 @@ import java.util.Objects;
 
 public abstract class Command extends ListenerAdapter {
 
-    public abstract void execute(Member member, Guild guild, TextChannel channel, String[] args);
+    public abstract void execute(Member member, Message message, Guild guild, TextChannel channel, String[] args);
 
     private final String name;
     private final Permission permission;
@@ -55,7 +56,7 @@ public abstract class Command extends ListenerAdapter {
             return;
         }
 
-        execute(event.getMember(), event.getGuild(), event.getChannel(), args);
+        execute(event.getMember(), event.getMessage(), event.getGuild(), event.getChannel(), args);
     }
 
     public Permission getPermission() {
