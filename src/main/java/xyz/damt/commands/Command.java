@@ -98,10 +98,7 @@ public abstract class Command extends ListenerAdapter {
 
     public void register(JDA jda, boolean log) {
         jda.addEventListener(this);
-
-        if (log) {
-            System.out.println("The command " + getName() + " has been registered!");
-        }
-
+        if (log) System.out.println("The command " + getName() + " has been registered!");
     }
+
 }
