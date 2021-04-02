@@ -25,6 +25,7 @@ public abstract class Command extends ListenerAdapter {
     private final String usage;
 
     protected boolean isMemberOnly;
+    protected boolean sendNoPermissionEmbed;
 
     public Command(String name, Permission permission, String usage) {
         this.name = name;
@@ -32,6 +33,7 @@ public abstract class Command extends ListenerAdapter {
         this.usage = usage;
 
         this.isMemberOnly = true;
+        this.sendNoPermissionEmbed = true;
     }
 
 
@@ -54,6 +56,10 @@ public abstract class Command extends ListenerAdapter {
         args = arguments.toArray(new String[0]);
 
         if (permission != null && !Objects.requireNonNull(event.getMember()).hasPermission(permission)) {
+            if (sendNoPermissionEmbed) {
+                sendEmbed(null, getNoPermissionMessage().replace("%permission%", permission.getName()), null, null, event.getChannel());
+                return;
+            }
             event.getChannel().sendMessage(getNoPermissionMessage().replace("%permission%", permission.getName())).queue();
             return;
         }
