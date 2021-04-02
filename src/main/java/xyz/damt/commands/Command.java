@@ -1,5 +1,6 @@
 package xyz.damt.commands;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -10,6 +11,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -77,6 +79,15 @@ public abstract class Command extends ListenerAdapter {
 
     public String getPrefix() {
         return "-";
+    }
+
+    public void sendEmbed(String title, String description, String footer, Color color, TextChannel channel) {
+        EmbedBuilder builder = new EmbedBuilder();
+        if (title != null) builder.setTitle(title);
+        if (description != null) builder.setDescription(description);
+        if (footer != null) builder.setFooter(footer);
+        if (color != null) builder.setColor(color);
+        if (channel != null) channel.sendMessage(builder.build()).queue();
     }
 
     public void register(JDA jda, boolean log) {
