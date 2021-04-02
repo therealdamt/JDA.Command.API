@@ -37,14 +37,4 @@ public class TestCommand extends Command {
 
         channel.sendMessage("Passed").queue();
     }
-
-    @Override //can be removed
-    public String getPrefix() {
-        return "-";
-    }
-
-    @Override //can be removed
-    public String getNoPermissionMessage() {
-        return "You don't have the permission %permission% to do this command!";
-    }
 }
