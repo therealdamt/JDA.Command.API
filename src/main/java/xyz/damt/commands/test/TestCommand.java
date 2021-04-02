@@ -13,6 +13,7 @@ public class TestCommand extends Command {
         super("test", Permission.ADMINISTRATOR, "-test test test");
 
         this.isMemberOnly = true;
+        this.prefix = "-";
     }
 
     @Override

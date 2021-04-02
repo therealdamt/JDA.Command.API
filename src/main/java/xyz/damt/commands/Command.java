@@ -26,6 +26,7 @@ public abstract class Command extends ListenerAdapter {
 
     protected boolean isMemberOnly;
     protected boolean sendNoPermissionEmbed;
+    protected String prefix;
 
     public Command(String name, Permission permission, String usage) {
         this.name = name;
@@ -34,6 +35,7 @@ public abstract class Command extends ListenerAdapter {
 
         this.isMemberOnly = true;
         this.sendNoPermissionEmbed = true;
+        this.prefix = "-";
     }
 
 
@@ -43,7 +45,7 @@ public abstract class Command extends ListenerAdapter {
 
         if (isMemberOnly) { if (Objects.requireNonNull(event.getMember()).getUser().isBot() || event.getMember().getUser().isFake()) return; }
 
-        if (!args[0].equalsIgnoreCase(getPrefix() + name)) {
+        if (!args[0].equalsIgnoreCase(prefix + name)) {
             return;
         }
 
@@ -81,10 +83,6 @@ public abstract class Command extends ListenerAdapter {
 
     public String getNoPermissionMessage() {
         return "You must have the permission %permission% to do this command!";
-    }
-
-    public String getPrefix() {
-        return "-";
     }
 
     public void sendEmbed(String title, String description, String footer, Color color, TextChannel channel) {
