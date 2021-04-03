@@ -15,6 +15,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public abstract class Command extends ListenerAdapter {
 
@@ -23,6 +25,7 @@ public abstract class Command extends ListenerAdapter {
     private final String name;
     private final Permission permission;
     private final String usage;
+    private final Executor asyncThread = Executors.newFixedThreadPool(1);
 
     protected boolean isMemberOnly;
     protected boolean sendNoPermissionEmbed;
@@ -59,14 +62,16 @@ public abstract class Command extends ListenerAdapter {
 
         if (permission != null && !Objects.requireNonNull(event.getMember()).hasPermission(permission)) {
             if (sendNoPermissionEmbed) {
-                sendEmbed(null, getNoPermissionMessage().replace("%permission%", permission.getName()), null, null, event.getChannel());
+                event.getChannel().sendMessage(createEmbed(null, getNoPermissionMessage().replace("%permission%",
+                        permission.getName()), null, null).build()).queue();
                 return;
             }
             event.getChannel().sendMessage(getNoPermissionMessage().replace("%permission%", permission.getName())).queue();
             return;
         }
 
-        execute(event.getMember(), event.getMessage(), event.getGuild(), event.getChannel(), args);
+        String[] finalArgs = args;
+        asyncThread.execute(() -> execute(event.getMember(), event.getMessage(), event.getGuild(), event.getChannel(), finalArgs));
     }
 
     public Permission getPermission() {
@@ -85,18 +90,18 @@ public abstract class Command extends ListenerAdapter {
         return "You must have the permission %permission% to do this command!";
     }
 
-    public void sendEmbed(String title, String description, String footer, Color color, TextChannel channel) {
+    public EmbedBuilder createEmbed(String title, String description, String footer, Color color) {
         EmbedBuilder builder = new EmbedBuilder();
         if (title != null) builder.setTitle(title);
         if (description != null) builder.setDescription(description);
         if (footer != null) builder.setFooter(footer);
         if (color != null) builder.setColor(color);
-        if (channel != null) channel.sendMessage(builder.build()).queue();
+        return builder;
     }
 
     public void register(JDA jda, boolean log) {
-        jda.addEventListener(this);
-        if (log) System.out.println("The command " + getName() + " has been registered!");
+        asyncThread.execute(() -> jda.addEventListener(this));
+        if (log) System.out.println(getName() + " command has been registered!");
     }
 
 }
