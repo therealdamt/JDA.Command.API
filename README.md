@@ -49,7 +49,7 @@ public class TestCommand extends Command {
     }
 
     @Override
-    public void execute(Member member, Guild guild, TextChannel channel, String[] args) {
+    public void execute(Member member, Message message, Guild guild, TextChannel channel, String[] args) {
         if (member.getUser().isBot() || member.getUser().isFake()) return;
 
         if (args.length != 1) {
