@@ -42,7 +42,7 @@ public class Bot { //The class "Bot" must be your main class!
 public class TestCommand extends Command {
 
     public TestCommand() {
-        super("test", Permission.ADMINISTRATOR, "-test test");
+        super("test", Permission.ADMINISTRATOR, "test test");
 
         this.isMemberOnly = true; //sets if the command is member only
         this.prefix = "-"; //the default prefix is "-" you can change in here or in Command.java
